@@ -1,31 +1,13 @@
-###
-#
-#  Sort integer arguments (ascending) 
-#
-###
+#!/usr/bin/env ruby
 
-result = []
-ARGV.each do |arg|
-    # skip if not integer
-    next if arg !~ /^-?[0-9]+$/
-
-    # convert to integer
-    i_arg = arg.to_i
-    
-    # insert result at the right position
-    is_inserted = false
-    i = 0
-    l = result.size
-    while !is_inserted && i < l do
-        if result[i] < i_arg
-            i += 1
-        else
-            result.insert(i - 1, i_arg)
-            is_inserted = true
-            break
-        end
-    end
-    result << i_arg if !is_inserted
+# Check if there are arguments provided
+if ARGV.empty?
+  puts "Usage: #{$PROGRAM_NAME} <numbers>"
+  exit(1)
 end
 
-puts result
+# Extract numerical arguments and sort them
+numbers = ARGV.select { |arg| arg.to_i.to_s == arg }.map(&:to_i).sort
+
+# Print sorted numbers
+puts numbers
